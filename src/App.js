@@ -11,7 +11,7 @@ import {
   useHistory,
 } from "react-router-dom";
 const api = axios.create({
-  baseURL: "https://youtube-downloader-be.herokuapp.com:3200",
+  baseURL: "https://youtube-downloader-be.herokuapp.com",
 });
 let DetailsPane = function ({ info }) {
   let DescriptionPart = function ({ desc }) {
