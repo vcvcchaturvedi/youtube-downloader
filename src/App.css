@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(233, 184, 92);
 }
 
 .App-link {
@@ -35,4 +35,72 @@
   to {
     transform: rotate(360deg);
   }
+}
+.inputURL {
+  height: 40px;
+  width: 570px;
+  padding: 5px;
+}
+input {
+  height: 20px;
+  width: 30px;
+}
+.btnDownload {
+  border-radius: 10%;
+  border: red;
+  color: rgb(27, 27, 73);
+  background-size: contain;
+  width: 230px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-color: rgb(235, 219, 74);
+  background-position-x: center;
+  font-size: 2rem;
+  background-image: url("./logo.png");
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px;
+}
+.btnDownload:focus {
+  cursor: grab;
+}
+.btnDownload:active {
+  background-color: brown;
+}
+.btnConfirmDownload {
+  border-radius: 10%;
+  border: red;
+  color: rgb(18, 185, 74);
+  background-size: contain;
+  width: 230px;
+  height: 100px;
+  background-color: rgb(74, 10, 94);
+  background-position-x: center;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px;
+}
+.title {
+  color: rgb(235, 219, 74);
+}
+.paneHeaders {
+  color: rgb(236, 68, 17);
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.description {
+  font-weight: lighter;
+  font-family: serif;
+  font-size: 10pt;
+}
+.format {
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10pt;
+}
+.Fetching {
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(233, 184, 92);
+  font-size: 14pt;
 }
