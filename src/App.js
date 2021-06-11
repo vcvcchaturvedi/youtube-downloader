@@ -47,7 +47,9 @@ let DetailsPane = function ({ info }) {
       </div>
     );
   };
-  let description = info.videoDetails.description.split(/(?:\r\n|\r|\n)/g);
+  let description = info.videoDetails.description
+    ? info.videoDetails.description.split(/(?:\r\n|\r|\n)/g)
+    : "";
   return (
     <div>
       <div className="row bg-dark">
@@ -143,11 +145,12 @@ let Home = function () {
 };
 let Download = function () {
   let history = useHistory();
+  const [fetchingDetails, setFetchingDetails] = useState(false);
   const [isInfoReady, setIsInfoReady] = useState(false);
   const [url, setURL] = useState("");
   const [info, setInfo] = useState({});
   const [fetching, setFetching] = useState(false);
-  let btnDownloadClick = function () {
+  let btnDownloadClick = function (e) {
     var pattern = new RegExp(
       "^(https?:\\/\\/)?" + // protocol
         "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
@@ -158,7 +161,9 @@ let Download = function () {
       "i"
     ); // fragment locator
 
-    if (!!pattern.test(url))
+    if (!!pattern.test(url)) {
+      e.target.disabled = true;
+      setFetchingDetails(true);
       api
         .post("/getInfo", { url: url })
         .then((res) => {
@@ -170,12 +175,16 @@ let Download = function () {
           setInfo(res.data);
           setIsInfoReady(true);
         })
-        .catch((err) => alert(err));
-    else {
+        .catch((err) => {
+          alert(err);
+          e.target.disabled = false;
+          setFetchingDetails(false);
+        });
+    } else {
       alert("Enter valid url");
     }
   };
-  let downloadFile = function () {
+  let downloadFile = function (e) {
     let audiovideo = document.getElementsByName("audio+video")[0];
 
     let video = document.getElementsByName("video");
@@ -214,6 +223,7 @@ let Download = function () {
       );
       return;
     }
+    e.target.disabled = true;
     if (audiovideo.checked) {
       setFetching(true);
       let tags = {
@@ -222,6 +232,7 @@ let Download = function () {
         },
         key: info.key,
       };
+
       api
         .post("/downloadWithInfo", tags)
         .then((res) => {
@@ -302,6 +313,7 @@ let Download = function () {
                   clearInterval(handle);
                   let split = res.data.url.split(".");
                   let extension = split[split.length - 1];
+
                   let xhr = await download(
                     resp.data,
                     info.videoDetails.title + "." + extension
@@ -327,6 +339,11 @@ let Download = function () {
   };
   return (
     <div>
+      {fetchingDetails ? (
+        <h2>Please wait while details for your video are being fetched...</h2>
+      ) : (
+        ""
+      )}
       <h4>Enter url to get video info:</h4>
 
       <input
