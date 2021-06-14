@@ -49,7 +49,7 @@ let DetailsPane = function ({ info }) {
   };
   let description = info.videoDetails.description
     ? info.videoDetails.description.split(/(?:\r\n|\r|\n)/g)
-    : "";
+    : [""];
   return (
     <div>
       <div className="row bg-dark">
@@ -168,7 +168,7 @@ let Download = function () {
         .post("/getInfo", { url: url })
         .then((res) => {
           if (res.data.message) {
-            alert("Enter valid URL");
+            alert("Enter valid URL" + res.data.message);
             return;
           }
           // alert(JSON.stringify(res.data));
@@ -181,7 +181,7 @@ let Download = function () {
           setFetchingDetails(false);
         });
     } else {
-      alert("Enter valid url");
+      alert("Enter valid url, pattern mismatch");
     }
   };
   let downloadFile = function (e) {
