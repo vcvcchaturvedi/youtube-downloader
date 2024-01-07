@@ -11,7 +11,7 @@ import {
   useHistory,
 } from "react-router-dom";
 const api = axios.create({
-  baseURL: "https://youtube-downloader-be.herokuapp.com",
+  baseURL: "https://youtube-downloader-x9c3.onrender.com", //"https://youtube-downloader-be.herokuapp.com",
 });
 let DetailsPane = function ({ info }) {
   let DescriptionPart = function ({ desc }) {
@@ -168,7 +168,7 @@ let Download = function () {
         .post("/getInfo", { url: url })
         .then((res) => {
           if (res.data.message) {
-            alert("Enter valid URL" + res.data.message);
+            alert("Enter valid URL" + JSON.stringify(res.data.message));
             return;
           }
           // alert(JSON.stringify(res.data));
